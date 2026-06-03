@@ -14,7 +14,8 @@
 
   <artifactId>spring-5-to-6</artifactId>
   <name>Spring Framework 5 to 6 Modernization Lab</name>
-  <description>Plain Spring Framework 5.3 baseline for OpenRewrite modernization exercises.</description>
+  <description
+    >Plain Spring Framework 5.3 baseline for OpenRewrite modernization exercises.</description>
 
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
@@ -51,4 +52,28 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+    <plugin>
+      <groupId>org.openrewrite.maven</groupId>
+      <artifactId>rewrite-maven-plugin</artifactId>
+      <version>6.40.0</version>
+      <configuration>
+        <configLocation
+                    >${maven.multiModuleProjectDirectory}/rewrite.yml</configLocation>
+        <activeRecipes>
+          <recipe>com.example.openrewrite.V3SpringFramework6Migration</recipe>
+        </activeRecipes>
+      </configuration>
+      <dependencies>
+        <dependency>
+          <groupId>org.openrewrite.recipe</groupId>
+          <artifactId>rewrite-spring</artifactId>
+          <version>6.30.4</version>
+        </dependency>
+      </dependencies>
+    </plugin>
+    </plugins>
+  </build>
 </project>

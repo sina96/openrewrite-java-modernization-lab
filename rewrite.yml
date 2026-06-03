@@ -22,3 +22,12 @@ recipeList:
   - org.openrewrite.java.testing.junit5.JUnit4to5Migration
   - org.openrewrite.java.RemoveUnusedImports
   - org.openrewrite.java.format.AutoFormat
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.example.openrewrite.V3SpringFramework6Migration
+displayName: V3 Spring Framework 6 Migration
+description: Migrate the non-Boot Spring Framework 5 module to Spring Framework 6 and clean up Java code.
+recipeList:
+  - org.openrewrite.java.spring.framework.UpgradeSpringFramework_6_2
+  - org.openrewrite.java.RemoveUnusedImports
+  - org.openrewrite.java.format.AutoFormat
