@@ -6,3 +6,12 @@ recipeList:
   - org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_5
   - org.openrewrite.java.RemoveUnusedImports
   - org.openrewrite.java.format.AutoFormat
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.example.openrewrite.V2Java17Migration
+displayName: V2 Java 8 to Java 17 Migration
+description: Migrate the plain Java module from Java 8 to Java 17 and clean up Java code.
+recipeList:
+  - org.openrewrite.java.migrate.UpgradeToJava17
+  - org.openrewrite.java.RemoveUnusedImports
+  - org.openrewrite.java.format.AutoFormat

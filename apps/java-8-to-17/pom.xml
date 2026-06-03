@@ -14,7 +14,8 @@
 
   <artifactId>java-8-to-17</artifactId>
   <name>Java 8 to 17 Modernization Lab</name>
-  <description>Plain Java 8 baseline for OpenRewrite modernization exercises.</description>
+  <description
+    >Plain Java 8 baseline for OpenRewrite modernization exercises.</description>
 
   <properties>
     <maven.compiler.source>8</maven.compiler.source>
@@ -30,4 +31,28 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+    <plugin>
+      <groupId>org.openrewrite.maven</groupId>
+      <artifactId>rewrite-maven-plugin</artifactId>
+      <version>6.40.0</version>
+      <configuration>
+        <configLocation
+                    >${maven.multiModuleProjectDirectory}/rewrite.yml</configLocation>
+        <activeRecipes>
+          <recipe>com.example.openrewrite.V2Java17Migration</recipe>
+        </activeRecipes>
+      </configuration>
+      <dependencies>
+        <dependency>
+          <groupId>org.openrewrite.recipe</groupId>
+          <artifactId>rewrite-migrate-java</artifactId>
+          <version>3.34.1</version>
+        </dependency>
+      </dependencies>
+    </plugin>
+    </plugins>
+  </build>
 </project>
