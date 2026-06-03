@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.example.openrewrite.V1SpringBoot3Migration
+displayName: V1 Spring Boot 3 Migration
+description: Migrate the V1 Spring Boot 2.7 sample app to Spring Boot 3.5 and clean up Java code.
+recipeList:
+  - org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_5
+  - org.openrewrite.java.RemoveUnusedImports
+  - org.openrewrite.java.format.AutoFormat

@@ -1,0 +1,107 @@
+diff --git a/apps/boot-27-to-3x/pom.xml b/apps/boot-27-to-3x/pom.xml
+index aa77048..bffcdd3 100644
+--- a/apps/boot-27-to-3x/pom.xml
++++ b/apps/boot-27-to-3x/pom.xml
+@@ -40,11 +40,6 @@ com.example.openrewrite.V1SpringBoot3Migration
+       <artifactId>spring-boot-starter-test</artifactId>
+       <scope>test</scope>
+     </dependency>
+-    <dependency>
+-      <groupId>org.junit.vintage</groupId>
+-      <artifactId>junit-vintage-engine</artifactId>
+-      <scope>test</scope>
+-    </dependency>
+   </dependencies>
+ 
+   <build>
+
+diff --git a/apps/boot-27-to-3x/src/main/java/com/example/openrewrite/boot27/CreateUserRequest.java b/apps/boot-27-to-3x/src/main/java/com/example/openrewrite/boot27/CreateUserRequest.java
+index c276a90..5ff982e 100644
+--- a/apps/boot-27-to-3x/src/main/java/com/example/openrewrite/boot27/CreateUserRequest.java
++++ b/apps/boot-27-to-3x/src/main/java/com/example/openrewrite/boot27/CreateUserRequest.java
+@@ -1,7 +1,7 @@ com.example.openrewrite.V1SpringBoot3Migration
+ package com.example.openrewrite.boot27;
+ 
+-import javax.validation.constraints.Email;
+-import javax.validation.constraints.NotBlank;
++import jakarta.validation.constraints.Email;
++import jakarta.validation.constraints.NotBlank;
+ 
+ public class CreateUserRequest {
+ 
+
+diff --git a/apps/boot-27-to-3x/src/main/java/com/example/openrewrite/boot27/User.java b/apps/boot-27-to-3x/src/main/java/com/example/openrewrite/boot27/User.java
+index ecbcfdc..35bcbea 100644
+--- a/apps/boot-27-to-3x/src/main/java/com/example/openrewrite/boot27/User.java
++++ b/apps/boot-27-to-3x/src/main/java/com/example/openrewrite/boot27/User.java
+@@ -1,11 +1,11 @@ com.example.openrewrite.V1SpringBoot3Migration
+ package com.example.openrewrite.boot27;
+ 
+-import javax.persistence.Column;
+-import javax.persistence.Entity;
+-import javax.persistence.GeneratedValue;
+-import javax.persistence.GenerationType;
+-import javax.persistence.Id;
+-import javax.persistence.Table;
++import jakarta.persistence.Column;
++import jakarta.persistence.Entity;
++import jakarta.persistence.GeneratedValue;
++import jakarta.persistence.GenerationType;
++import jakarta.persistence.Id;
++import jakarta.persistence.Table;
+ 
+ @Entity
+ @Table(name = "users")
+
+diff --git a/apps/boot-27-to-3x/src/main/java/com/example/openrewrite/boot27/UserController.java b/apps/boot-27-to-3x/src/main/java/com/example/openrewrite/boot27/UserController.java
+index a850ae0..04e88d2 100644
+--- a/apps/boot-27-to-3x/src/main/java/com/example/openrewrite/boot27/UserController.java
++++ b/apps/boot-27-to-3x/src/main/java/com/example/openrewrite/boot27/UserController.java
+@@ -3,7 +3,7 @@ com.example.openrewrite.V1SpringBoot3Migration
+ import java.net.URI;
+ import java.util.List;
+ 
+-import javax.validation.Valid;
++import jakarta.validation.Valid;
+ 
+ import org.springframework.http.ResponseEntity;
+ import org.springframework.web.bind.annotation.DeleteMapping;
+
+diff --git a/apps/boot-27-to-3x/src/test/java/com/example/openrewrite/boot27/UserControllerTest.java b/apps/boot-27-to-3x/src/test/java/com/example/openrewrite/boot27/UserControllerTest.java
+index 614c145..542acad 100644
+--- a/apps/boot-27-to-3x/src/test/java/com/example/openrewrite/boot27/UserControllerTest.java
++++ b/apps/boot-27-to-3x/src/test/java/com/example/openrewrite/boot27/UserControllerTest.java
+@@ -1,12 +1,10 @@ com.example.openrewrite.V1SpringBoot3Migration
+ package com.example.openrewrite.boot27;
+ 
+-import org.junit.Test;
+-import org.junit.runner.RunWith;
++import org.junit.jupiter.api.Test;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+ import org.springframework.boot.test.context.SpringBootTest;
+ import org.springframework.http.MediaType;
+-import org.springframework.test.context.junit4.SpringRunner;
+ import org.springframework.test.web.servlet.MockMvc;
+ 
+ import static org.hamcrest.Matchers.hasSize;
+@@ -15,7 +13,6 @@
+ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+ 
+-@RunWith(SpringRunner.class)
+ @SpringBootTest
+ @AutoConfigureMockMvc
+ public class UserControllerTest {
+@@ -26,8 +23,8 @@
+     @Test
+     public void createsAndListsUsers() throws Exception {
+         mockMvc.perform(post("/users")
+-                        .contentType(MediaType.APPLICATION_JSON)
+-                        .content("{\"name\":\"Ada Lovelace\",\"email\":\"ada@example.com\"}"))
++                .contentType(MediaType.APPLICATION_JSON)
++                .content("{\"name\":\"Ada Lovelace\",\"email\":\"ada@example.com\"}"))
+                 .andExpect(status().isCreated())
+                 .andExpect(jsonPath("$.name").value("Ada Lovelace"))
+                 .andExpect(jsonPath("$.email").value("ada@example.com"));
+
