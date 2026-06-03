@@ -1,17 +1,17 @@
 package com.example.openrewrite.java8;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class CustomerOrder {
 
     private String orderNumber;
-    private Date createdAt;
+    private LocalDate createdAt;
     private OrderStatus status;
-    private List<OrderLine> lines = new ArrayList<OrderLine>();
+    private List<OrderLine> lines = new ArrayList<>();
 
-    public CustomerOrder(String orderNumber, Date createdAt) {
+    public CustomerOrder(String orderNumber, LocalDate createdAt) {
         this.orderNumber = orderNumber;
         this.createdAt = createdAt;
         this.status = OrderStatus.NEW;
@@ -25,11 +25,11 @@ public class CustomerOrder {
         this.orderNumber = orderNumber;
     }
 
-    public Date getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 

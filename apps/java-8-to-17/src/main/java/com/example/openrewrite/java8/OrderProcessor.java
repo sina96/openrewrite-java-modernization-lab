@@ -1,14 +1,22 @@
 package com.example.openrewrite.java8;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Clock;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderProcessor {
 
-    private static final String RECEIPT_DATE_FORMAT = "yyyy-MM-dd";
+    private final Clock clock;
+
+    public OrderProcessor() {
+        this(Clock.systemDefaultZone());
+    }
+
+    public OrderProcessor(Clock clock) {
+        this.clock = clock;
+    }
 
     public Receipt process(CustomerOrder order) {
         if (order == null) {
@@ -22,36 +30,29 @@ public class OrderProcessor {
             order.setStatus(OrderStatus.PAID);
         }
 
-        SimpleDateFormat formatter = new SimpleDateFormat(RECEIPT_DATE_FORMAT);
-        String processedDate = formatter.format(new Date());
+        LocalDate processedDate = LocalDate.now(clock);
         return new Receipt(order.getOrderNumber(), processedDate, total, order.getStatus());
     }
 
     public BigDecimal calculateTotal(List<OrderLine> lines) {
-        BigDecimal total = BigDecimal.ZERO;
-        for (int i = 0; i < lines.size(); i++) {
-            OrderLine line = lines.get(i);
-            if (line.getQuantity() > 0) {
-                total = total.add(line.getLineTotal());
-            }
-        }
-        return total;
+        return lines.stream()
+                .filter(line -> line.getQuantity() > 0)
+                .map(OrderLine::getLineTotal)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public boolean isOlderThanThirtyDays(CustomerOrder order, Date now) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(now);
-        calendar.add(Calendar.DAY_OF_MONTH, -30);
-        return order.getCreatedAt().before(calendar.getTime());
+    public boolean isOlderThanThirtyDays(CustomerOrder order, LocalDate today) {
+        return order.getCreatedAt().isBefore(today.minusDays(30));
     }
 
     public String buildSummary(CustomerOrder order) {
-        String summary = "";
-        summary = summary + "Order ";
-        summary = summary + order.getOrderNumber();
-        summary = summary + " has ";
-        summary = summary + order.getLines().size();
-        summary = summary + " line(s)";
-        return summary;
+        String skus = order.getLines().stream()
+                .map(OrderLine::getSku)
+                .collect(Collectors.joining(", "));
+        return "Order %s has %d line(s): %s".formatted(
+                order.getOrderNumber(),
+                order.getLines().size(),
+                skus
+        );
     }
 }

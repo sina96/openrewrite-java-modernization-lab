@@ -1,15 +1,16 @@
 package com.example.openrewrite.java8;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class Receipt {
 
     private final String orderNumber;
-    private final String processedDate;
+    private final LocalDate processedDate;
     private final BigDecimal total;
     private final OrderStatus status;
 
-    public Receipt(String orderNumber, String processedDate, BigDecimal total, OrderStatus status) {
+    public Receipt(String orderNumber, LocalDate processedDate, BigDecimal total, OrderStatus status) {
         this.orderNumber = orderNumber;
         this.processedDate = processedDate;
         this.total = total;
@@ -20,7 +21,7 @@ public class Receipt {
         return orderNumber;
     }
 
-    public String getProcessedDate() {
+    public LocalDate getProcessedDate() {
         return processedDate;
     }
 
