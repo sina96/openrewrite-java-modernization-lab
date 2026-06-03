@@ -18,16 +18,15 @@
     >Plain Java 8 baseline for OpenRewrite modernization exercises.</description>
 
   <properties>
-    <maven.compiler.source>8</maven.compiler.source>
-    <maven.compiler.target>8</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.2</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.14.4</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -50,6 +49,11 @@
           <groupId>org.openrewrite.recipe</groupId>
           <artifactId>rewrite-migrate-java</artifactId>
           <version>3.34.1</version>
+        </dependency>
+        <dependency>
+          <groupId>org.openrewrite.recipe</groupId>
+          <artifactId>rewrite-testing-frameworks</artifactId>
+          <version>3.35.3</version>
         </dependency>
       </dependencies>
     </plugin>

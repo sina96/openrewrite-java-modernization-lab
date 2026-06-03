@@ -13,5 +13,12 @@ displayName: V2 Java 8 to Java 17 Migration
 description: Migrate the plain Java module from Java 8 to Java 17 and clean up Java code.
 recipeList:
   - org.openrewrite.java.migrate.UpgradeToJava17
+  - org.openrewrite.maven.ChangePropertyValue:
+      key: maven.compiler.source
+      newValue: 17
+  - org.openrewrite.maven.ChangePropertyValue:
+      key: maven.compiler.target
+      newValue: 17
+  - org.openrewrite.java.testing.junit5.JUnit4to5Migration
   - org.openrewrite.java.RemoveUnusedImports
   - org.openrewrite.java.format.AutoFormat
