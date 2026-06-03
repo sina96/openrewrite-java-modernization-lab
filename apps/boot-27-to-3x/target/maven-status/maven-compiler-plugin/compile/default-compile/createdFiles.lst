@@ -1,0 +1,6 @@
+com/example/openrewrite/boot27/UserRepository.class
+com/example/openrewrite/boot27/Boot27To3xApplication.class
+com/example/openrewrite/boot27/UserService.class
+com/example/openrewrite/boot27/CreateUserRequest.class
+com/example/openrewrite/boot27/User.class
+com/example/openrewrite/boot27/UserController.class
