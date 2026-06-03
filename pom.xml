@@ -12,5 +12,6 @@
 
   <modules>
     <module>apps/boot-27-to-3x</module>
+    <module>apps/java-8-to-17</module>
   </modules>
 </project>
