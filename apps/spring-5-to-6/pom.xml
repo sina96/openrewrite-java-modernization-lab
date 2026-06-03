@@ -20,7 +20,7 @@
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring-framework.version>5.3.39</spring-framework.version>
+    <spring-framework.version>6.2.18</spring-framework.version>
   </properties>
 
   <dependencies>
