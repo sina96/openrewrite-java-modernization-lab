@@ -13,5 +13,6 @@
   <modules>
     <module>apps/boot-27-to-3x</module>
     <module>apps/java-8-to-17</module>
+    <module>apps/spring-5-to-6</module>
   </modules>
 </project>
